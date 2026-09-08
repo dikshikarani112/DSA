@@ -51,14 +51,22 @@ public class DetectCycleStart {
        return null;
     }
 
-    public ListNode detectLenghtCycle(ListNode head) {
-        Set<ListNode> visited = new HashSet<ListNode>();
-        while(head != null) {
-            if(visited.contains(head)) {
-                return head;
+    public ListNode detectCycleOptimal(ListNode head) {
+       ListNode slow = head;
+       ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if(slow == fast) {
+                slow = head;
+                while (slow != fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow;
             }
-            visited.add(head);
-            head = head.next;
         }
         return null;
     }
@@ -70,10 +78,10 @@ public class DetectCycleStart {
             list.insertAtTail(arr[i]);
         }
 
-//        ListNode three = list.head.next.next;  // 3
-//        ListNode five = three.next.next;       // 5
-//
-//        five.next = three;                     // 5 -> 3
+        ListNode three = list.head.next.next;  // 3
+        ListNode five = three.next.next;       // 5
+
+        five.next = three;                     // 5 -> 3
 
         ListNode cycleStart = list.detectCycle(list.head);
         if (cycleStart != null) {
