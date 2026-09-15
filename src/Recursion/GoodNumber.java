@@ -26,7 +26,7 @@ public class GoodNumber {
     }
 
 
-    static void main(String[] args) {
+    static void main() {
         //long n = 1;
         long n = 20000000000L;
         System.out.println(countGoodNumber(n));
